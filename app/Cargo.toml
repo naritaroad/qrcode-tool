@@ -44,7 +44,7 @@ slint = { version = "~1.18", default-features = false, features = [
     "system-tray",
     "unstable-winit-030",
 ] }
-global-hotkey = "0.8"
+global-hotkey = "0.9"
 rfd = { version = "0.17", default-features = false, features = ["xdg-portal", "wayland"] }
 clap = { version = "4.6", features = ["derive"] }
 anyhow.workspace = true
