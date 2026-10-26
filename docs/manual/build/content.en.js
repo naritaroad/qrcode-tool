@@ -450,7 +450,7 @@ module.exports = {
           ['Create QR code…', 'Opens the QR code generator.'],
           ['History', 'Opens **Settings › Privacy & history**.'],
           ['Settings', 'Opens Settings.'],
-          ['User manual (“?” button)', 'Opens the PDF user manual on GitHub in a new browser tab: the Traditional Chinese edition when the UI is in Chinese, the English edition otherwise.'],
+          ['User manual (“?” button)', 'Opens the PDF user manual on GitHub in a new browser tab, in the language of the user interface.'],
           ['Collapse to bubble', 'Hides the toolbar and shows the small round bubble instead.'],
           ['Close toolbar', 'Hides the toolbar (the bubble does not appear). The program keeps running in the tray.'],
         ],

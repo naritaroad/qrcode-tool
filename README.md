@@ -12,13 +12,13 @@
 ![Languages](https://img.shields.io/badge/languages-10-informational)
 ![Privacy](https://img.shields.io/badge/privacy-no%20telemetry-success)
 
- · **English** · [繁體中文](docs/i18n/README.zh-TW.md) · 
+ · **English** · [繁體中文](docs/i18n/README.zh-TW.md) · [简体中文](docs/i18n/README.zh-CN.md) · [Español](docs/i18n/README.es.md) · [Português (Brasil)](docs/i18n/README.pt-BR.md) · [日本語](docs/i18n/README.ja.md) · [한국어](docs/i18n/README.ko.md) · [Français](docs/i18n/README.fr.md) · [Deutsch](docs/i18n/README.de.md) · [Русский](docs/i18n/README.ru.md) · 
 
 Press a shortcut → every QR code on your screen gets a label → press Enter.  
 
 Works with your webcam too. Free, open source and private.
 
-📘 **User manual:** [PDF](docs/manual/QRcode-tool-User-Manual-en.pdf) · [.docx](docs/manual/QRcode-tool-User-Manual-en.docx) — also attached to every [release](https://github.com/naritaroad/qrcode-tool/releases/latest).
+📘 **User manual:** [PDF](docs/manual/QRcode-tool-User-Manual-en.pdf) · [.docx](docs/manual/QRcode-tool-User-Manual-en.docx) — also attached to every [release](https://github.com/naritaroad/qrcode-tool/releases/latest). Other languages are in [docs/manual](docs/manual/README.md).
 
 ![Screen scan: every code on the screen gets a pill with its site name](docs/assets/screen-scan.png)
 
@@ -201,7 +201,7 @@ qrcode-tool/
 ├─ assets/icons/           # App and tray icons
 ├─ packaging/              # MSIX, Linux desktop entry, macOS bundle info
 ├─ docs/                   # Architecture, building, FAQ, privacy, translations
-│  └─ manual/              #   User manual (PDF + Word, English and 繁體中文) and its build scripts
+│  └─ manual/              #   User manual (PDF + Word, 10 languages) and its build scripts
 └─ .github/workflows/      # CI and release pipeline
 ```
 

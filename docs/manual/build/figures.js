@@ -17,7 +17,7 @@ fs.mkdirSync(dst, { recursive: true });
 const FIGURES = {
   welcome: {},
   'tray-menu': { crop: [1050, 300, 870, 780] },
-  // menus: desktop at logical (560, 150), image at (120, 250); 300 wide
+  // menus: desktop at logical (560, 150), image at (120, 250); 360 wide
   'shell-desktop': { crop: [690, 180, 780, 700] },
   'shell-image': { crop: [0, 300, 780, 760] },
   'scan-screen': { crop: [0, 0, 1920, 1080] },

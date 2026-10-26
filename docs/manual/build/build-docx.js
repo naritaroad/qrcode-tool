@@ -36,7 +36,10 @@ const [lang, outDir] = process.argv.slice(2);
 const C = require(`./content.${lang}.js`);
 const FIG = path.join(__dirname, 'figures', lang);
 const ART = path.join(__dirname, 'art');
-const zh = lang.startsWith('zh');
+// Chinese, Japanese and Korean: East Asian font for the text, Segoe UI for Latin letters.
+const cjk = /^(zh|ja|ko)/.test(lang);
+// Chinese and Japanese separate numbers from titles with an ideographic space.
+const wide = /^(zh|ja)/.test(lang);
 // The app version, from the workspace manifest.
 const VERSION = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'Cargo.toml'), 'utf8').match(/^version = "([^"]+)"/m)[1];
 
@@ -47,9 +50,9 @@ const TEXT = '1B1B1B';
 const MUTED = '5B6170';
 const RULE = 'D5DAE3';
 const TINT = 'EEF2FF';
-const FONT = zh ? { ascii: 'Segoe UI', hAnsi: 'Segoe UI', eastAsia: C.font, cs: 'Segoe UI' } : { ascii: C.font, hAnsi: C.font, eastAsia: C.font, cs: C.font };
-const MONO = { ascii: C.monoFont, hAnsi: C.monoFont, eastAsia: zh ? C.font : C.monoFont, cs: C.monoFont };
-const SEP = zh ? '　' : ' '; // between number and title
+const FONT = cjk ? { ascii: 'Segoe UI', hAnsi: 'Segoe UI', eastAsia: C.font, cs: 'Segoe UI' } : { ascii: C.font, hAnsi: C.font, eastAsia: C.font, cs: C.font };
+const MONO = { ascii: C.monoFont, hAnsi: C.monoFont, eastAsia: cjk ? C.font : C.monoFont, cs: C.monoFont };
+const SEP = wide ? '　' : ' '; // between number and title
 const PAGE = { w: 11906, h: 16838 }; // A4 in twips
 const MARGIN = { top: 1474, bottom: 1361, left: 1304, right: 1304 };
 const CONTENT_TW = PAGE.w - MARGIN.left - MARGIN.right;
@@ -239,7 +242,7 @@ function body() {
         new Paragraph({
           pageBreakBefore: true,
           spacing: { before: 0, after: 80 },
-          children: [new TextRun({ text: label.toUpperCase(), color: BLUE, bold: true, size: 20, characterSpacing: zh ? 40 : 60 })],
+          children: [new TextRun({ text: label.toUpperCase(), color: BLUE, bold: true, size: 20, characterSpacing: cjk ? 40 : 60 })],
         }),
       );
       out.push(
@@ -381,7 +384,7 @@ const doc = new Document({
   features: { updateFields: true },
   styles: {
     default: {
-      document: { run: { font: FONT, size: 21, color: TEXT }, paragraph: { spacing: { after: 140, line: zh ? 336 : 312 } } },
+      document: { run: { font: FONT, size: 21, color: TEXT }, paragraph: { spacing: { after: 140, line: cjk ? 336 : 312 } } },
       heading1: {
         run: { font: FONT, size: 44, bold: true, color: TEXT },
         paragraph: { spacing: { before: 0, after: 360 }, keepNext: true, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: BLUE, space: 8 } } },

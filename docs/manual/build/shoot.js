@@ -65,7 +65,8 @@ const T = (id, ...args) => {
   for (const a of args) s = s.replace('{}', a);
   return s;
 };
-const L = (en, zh) => (lang === 'zh-TW' ? zh : en);
+// Demo data in the language of the manual: { en: …, 'zh-TW': …, … }, English when missing.
+const L = (texts) => texts[lang] ?? texts.en;
 
 // ── images ──
 function qrImage(text, px = 6, margin = 4) {
@@ -152,13 +153,36 @@ const model = (arr) => new slint.ArrayModel(arr);
 const px = (v) => Math.round(v * SCALE);
 
 // Demo codes on the mock event page.
+const ORGANIZER = L({ en: 'Mei-Ling Chen', 'zh-TW': '陳美玲', 'zh-CN': '陈美玲' });
+const OFFICE = L({
+  en: 'Seminar Office',
+  'zh-TW': '講座籌備處',
+  'zh-CN': '讲座筹备处',
+  es: 'Oficina del seminario',
+  'pt-BR': 'Secretaria do seminário',
+  ja: 'セミナー事務局',
+  ko: '세미나 사무국',
+  fr: 'Bureau du séminaire',
+  de: 'Seminarbüro',
+  ru: 'Оргкомитет семинара',
+});
+// A plain-text entry in the scan history.
+const ROOM_NOTE = L({
+  en: 'Room 302 — bring your student ID',
+  'zh-TW': '302 教室，請攜帶學生證',
+  'zh-CN': '302 教室，请携带学生证',
+  es: 'Aula 302: trae tu carné de estudiante',
+  'pt-BR': 'Sala 302 — traga sua carteirinha de estudante',
+  ja: '302 教室・学生証を持参してください',
+  ko: '302호 강의실 — 학생증을 지참하세요',
+  fr: 'Salle 302 — apportez votre carte d’étudiant',
+  de: 'Raum 302 – bitte Studierendenausweis mitbringen',
+  ru: 'Аудитория 302 — возьмите студенческий билет',
+});
 const CODES = {
   link: 'https://events.example.org/register',
   wifi: 'WIFI:T:WPA;S:Seminar-Guest;P:autumn-2026;;',
-  contact: L(
-    'BEGIN:VCARD\nVERSION:3.0\nFN:Mei-Ling Chen\nORG:Seminar Office\nTEL:+886-2-2345-6789\nEMAIL:office@example.org\nEND:VCARD',
-    'BEGIN:VCARD\nVERSION:3.0\nFN:陳美玲\nORG:講座籌備處\nTEL:+886-2-2345-6789\nEMAIL:office@example.org\nEND:VCARD',
-  ),
+  contact: `BEGIN:VCARD\nVERSION:3.0\nFN:${ORGANIZER}\nORG:${OFFICE}\nTEL:+886-2-2345-6789\nEMAIL:office@example.org\nEND:VCARD`,
   short: 'http://bit.ly/4kQ2xZp',
 };
 const qrs = {
@@ -167,7 +191,6 @@ const qrs = {
   qr2: qrImage(CODES.contact),
   qr3: qrImage(CODES.short),
 };
-const ORGANIZER = L('Mei-Ling Chen', '陳美玲');
 // QR positions on the mock desktop, logical pixels (see scenes.slint).
 const qrBox = (i) => ({ x: 165 + 260 * i, y: 284, w: 170, h: 170 });
 const pill = (i, kind, label, sublabel, level, selected = false, live = true) => {
@@ -421,7 +444,7 @@ async function main() {
           { time: '2026-11-14 10:28', kind: 'url', text: CODES.link, openable: true },
           { time: '2026-11-14 10:27', kind: 'contact', text: ORGANIZER, openable: false },
           { time: '2026-11-13 16:05', kind: 'einvoice', text: 'AB-12345678', openable: false },
-          { time: '2026-11-12 09:41', kind: 'text', text: L('Room 302 — bring your student ID', '302 教室，請攜帶學生證'), openable: false },
+          { time: '2026-11-12 09:41', kind: 'text', text: ROOM_NOTE, openable: false },
         ]),
         version: '1.0.0',
         update_status: T('QRcode tool {} is the latest version.', '1.0.0'),
