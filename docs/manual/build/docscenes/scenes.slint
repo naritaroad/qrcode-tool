@@ -565,7 +565,8 @@ component ShellSep inherits Rectangle {
 }
 
 component ShellMenu inherits Rectangle {
-    width: 300px;
+    // Wide enough for the longest Explorer entries (Russian, Portuguese).
+    width: 360px;
     height: list.preferred-height;
     background: #f9f9f9;
     border-radius: 8px;

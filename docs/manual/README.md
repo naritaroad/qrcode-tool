@@ -6,8 +6,18 @@ The complete user manual for QRcode tool 1.0, with screenshots of every window i
 |---|---|---|
 | English | [QRcode-tool-User-Manual-en.pdf](QRcode-tool-User-Manual-en.pdf) | [QRcode-tool-User-Manual-en.docx](QRcode-tool-User-Manual-en.docx) |
 | 繁體中文 | [QRcode-tool-User-Manual-zh-TW.pdf](QRcode-tool-User-Manual-zh-TW.pdf) | [QRcode-tool-User-Manual-zh-TW.docx](QRcode-tool-User-Manual-zh-TW.docx) |
+| 简体中文 | [QRcode-tool-User-Manual-zh-CN.pdf](QRcode-tool-User-Manual-zh-CN.pdf) | [QRcode-tool-User-Manual-zh-CN.docx](QRcode-tool-User-Manual-zh-CN.docx) |
+| Español | [QRcode-tool-User-Manual-es.pdf](QRcode-tool-User-Manual-es.pdf) | [QRcode-tool-User-Manual-es.docx](QRcode-tool-User-Manual-es.docx) |
+| Português (Brasil) | [QRcode-tool-User-Manual-pt-BR.pdf](QRcode-tool-User-Manual-pt-BR.pdf) | [QRcode-tool-User-Manual-pt-BR.docx](QRcode-tool-User-Manual-pt-BR.docx) |
+| 日本語 | [QRcode-tool-User-Manual-ja.pdf](QRcode-tool-User-Manual-ja.pdf) | [QRcode-tool-User-Manual-ja.docx](QRcode-tool-User-Manual-ja.docx) |
+| 한국어 | [QRcode-tool-User-Manual-ko.pdf](QRcode-tool-User-Manual-ko.pdf) | [QRcode-tool-User-Manual-ko.docx](QRcode-tool-User-Manual-ko.docx) |
+| Français | [QRcode-tool-User-Manual-fr.pdf](QRcode-tool-User-Manual-fr.pdf) | [QRcode-tool-User-Manual-fr.docx](QRcode-tool-User-Manual-fr.docx) |
+| Deutsch | [QRcode-tool-User-Manual-de.pdf](QRcode-tool-User-Manual-de.pdf) | [QRcode-tool-User-Manual-de.docx](QRcode-tool-User-Manual-de.docx) |
+| Русский | [QRcode-tool-User-Manual-ru.pdf](QRcode-tool-User-Manual-ru.pdf) | [QRcode-tool-User-Manual-ru.docx](QRcode-tool-User-Manual-ru.docx) |
 
-The same files are attached to every [GitHub release](https://github.com/naritaroad/qrcode-tool/releases/latest).
+The English and Traditional Chinese files are also attached to every
+[GitHub release](https://github.com/naritaroad/qrcode-tool/releases/latest); the other languages
+are only here.
 
 **Contents:** introduction · installation and first start · scanning the screen · webcam, clipboard,
 image files, right-click menu and command line · results and detail cards · link safety ·
@@ -20,8 +30,9 @@ updating and uninstalling · troubleshooting · shortcuts and supported codes.
 
 ## Updating the manual
 
-The text lives in [`build/content.en.js`](build/content.en.js) and
-[`build/content.zh-TW.js`](build/content.zh-TW.js). The screenshots are not edited by hand: they
+The text lives in `build/content.<lang>.js`, for example [`build/content.en.js`](build/content.en.js),
+and the texts of the mock desktop in the screenshots in `build/docscenes/strings.<lang>.json`.
+The screenshots are not edited by hand: they
 are rendered from the app's real `.slint` files (with the translations from `app/translations`)
 by the Slint interpreter for Node.js, so they always match the current UI.
 
@@ -38,7 +49,8 @@ through Word, which also fills in the table of contents.
 Screenshots are kept in `screenshots/<lang>/` next to this file. The folder is not in git, so a
 fresh checkout takes them all once; after that only changed windows need retaking:
 `build.ps1 -Shots toolbar-row,settings-general` (names are listed in `AGENTS.md`),
-`-Shots all` for everything, `-SkipShots` to rebuild only the documents.
+`-Shots all` for everything, `-SkipShots` to rebuild only the documents, and `-Langs ja,ko` to
+build only some languages.
 
 | Step | Script |
 |---|---|

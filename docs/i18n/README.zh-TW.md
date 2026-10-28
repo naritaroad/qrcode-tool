@@ -12,7 +12,7 @@
 ![Languages](https://img.shields.io/badge/languages-10-informational)
 ![Privacy](https://img.shields.io/badge/privacy-no%20telemetry-success)
 
- · [English](../../README.md) · **繁體中文** · 
+ · [English](../../README.md) · **繁體中文** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Русский](README.ru.md) · 
 
 按一個快速鍵 → 螢幕上每個 QR Code 都會出現標籤 → 按 Enter 開啟。  
 
@@ -180,6 +180,7 @@ qrcode-tool/
 ├─ assets/icons/           # 應用程式與系統匣圖示
 ├─ packaging/              # MSIX、Linux 桌面項目、macOS 套件資訊
 ├─ docs/                   # 架構、建置、FAQ、隱私、翻譯
+│  └─ manual/              #   使用說明書（PDF 與 Word，10 種語言）及建置腳本
 └─ .github/workflows/      # CI 與發佈流程
 ```
 

@@ -39,7 +39,17 @@ Language*. The language switches immediately.
    (`Language`, `Plural-Forms`) and translate.
 3. Add the language to `LANGUAGES` in `crates/qrtool-core/src/locale.rs` (code and native name)
    and to `locale::resolve` if the system locale needs mapping.
-4. Add the language to the table above and to the README.
+4. Add the language to the table above and to the language links at the top of every README.
+5. Optionally add `docs/i18n/README.<code>.md` and a user manual (see below).
+
+## README and user manual
+
+Each language has a README in `docs/i18n/README.<code>.md` and a user manual built from
+`docs/manual/build/content.<code>.js` (text) and `docs/manual/build/docscenes/strings.<code>.json`
+(texts of the mock desktop in the screenshots). Keep the README sections and the manual blocks in
+the same order as the English ones. Rebuild one manual with
+`docs\manual\build\build.ps1 -Langs <code>` (see `docs/manual/README.md`). Only the English and
+Traditional Chinese manuals are attached to releases; the others are linked from `docs/manual`.
 
 ## For developers: changing UI text
 

@@ -168,11 +168,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload "v$VERSION" artifacts/release-*/SHA256SUMS-*.txt --clobber
-      # The user manuals (built with docs/manual/build/build.ps1 and committed) are
-      # downloadable next to the installers.
+      # The English and Traditional Chinese user manuals (built with
+      # docs/manual/build/build.ps1 and committed) are downloadable next to the installers.
+      # The other languages are only in docs/manual.
       - name: User manuals
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ls docs/manual/QRcode-tool-User-Manual-*.pdf docs/manual/QRcode-tool-User-Manual-*.docx
-          gh release upload "v$VERSION" docs/manual/QRcode-tool-User-Manual-*.pdf docs/manual/QRcode-tool-User-Manual-*.docx --clobber
+          files="docs/manual/QRcode-tool-User-Manual-en.pdf docs/manual/QRcode-tool-User-Manual-en.docx docs/manual/QRcode-tool-User-Manual-zh-TW.pdf docs/manual/QRcode-tool-User-Manual-zh-TW.docx"
+          ls $files
+          gh release upload "v$VERSION" $files --clobber

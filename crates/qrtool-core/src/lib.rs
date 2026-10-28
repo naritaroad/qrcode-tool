@@ -42,9 +42,13 @@ pub mod app_info {
     pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
     /// The PDF user manual in the repository for a UI language code ("zh-TW", "en", …).
-    /// Chinese UI languages get the Traditional Chinese manual, every other one English.
+    /// Every UI language has its own manual; unknown codes get the English one.
     pub fn manual_url(language: &str) -> String {
-        let file = if language.starts_with("zh") { "zh-TW" } else { "en" };
+        let file = if crate::locale::is_supported(language) {
+            language
+        } else {
+            "en"
+        };
         format!("{REPO_URL}/blob/main/docs/manual/QRcode-tool-User-Manual-{file}.pdf")
     }
 
@@ -58,9 +62,11 @@ pub mod app_info {
                 manual_url("zh-TW"),
                 "https://github.com/naritaroad/qrcode-tool/blob/main/docs/manual/QRcode-tool-User-Manual-zh-TW.pdf"
             );
-            assert!(manual_url("zh-CN").ends_with("-zh-TW.pdf"));
+            assert!(manual_url("zh-CN").ends_with("-zh-CN.pdf"));
             assert!(manual_url("en").ends_with("-en.pdf"));
-            assert!(manual_url("ja").ends_with("-en.pdf"));
+            assert!(manual_url("ja").ends_with("-ja.pdf"));
+            assert!(manual_url("pt-BR").ends_with("-pt-BR.pdf"));
+            assert!(manual_url("xx").ends_with("-en.pdf"));
             assert!(crate::url_safety::analyze_url(&manual_url("de")).is_ok());
         }
     }

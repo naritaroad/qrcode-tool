@@ -1,4 +1,4 @@
-# Rebuilds the user manuals in docs/manual (Word + PDF, English and Traditional Chinese).
+# Rebuilds the user manuals in docs/manual (Word + PDF, one per UI language).
 #
 # Requirements: Windows, Node.js 20+, Microsoft Word, .NET Framework 4 (csc.exe, part of Windows).
 # Screenshots are rendered from the app's real .slint files with the Slint interpreter, so no
@@ -7,16 +7,18 @@
 #
 # Usage: powershell -ExecutionPolicy Bypass -File docs\manual\build\build.ps1 [options]
 #   (no options)                       take missing screenshots, rebuild Word + PDF
-#   -Shots toolbar-row,settings-general  also retake these screenshots (both languages)
+#   -Shots toolbar-row,settings-general  also retake these screenshots (every language)
 #   -Shots all                         retake every screenshot
 #   -SkipShots                         use the existing screenshots only
 #   -Art                               redraw the cover and back-cover artwork
-param([string[]]$Shots = @(), [switch]$SkipShots, [switch]$Art)
+#   -Langs ja,ko                       only these languages (default: all ten)
+param([string[]]$Shots = @(), [switch]$SkipShots, [switch]$Art,
+    [string[]]$Langs = @("en", "zh-TW", "zh-CN", "es", "pt-BR", "ja", "ko", "fr", "de", "ru"))
 $ErrorActionPreference = "Stop"
 $here = $PSScriptRoot
 $repo = (Resolve-Path (Join-Path $here "..\..\..")).Path
 $manual = (Resolve-Path (Join-Path $here "..")).Path
-$langs = @("en", "zh-TW")
+$langs = @($Langs | ForEach-Object { $_ -split "," } | Where-Object { $_ })
 
 Push-Location $here
 try {
@@ -42,9 +44,8 @@ try {
         node figures.js $l; if ($LASTEXITCODE) { throw "figures $l" }
         node build-docx.js $l $manual; if ($LASTEXITCODE) { throw "docx $l" }
     }
-    & powershell -NoProfile -ExecutionPolicy Bypass -File to-pdf.ps1 `
-        (Join-Path $manual "QRcode-tool-User-Manual-en.docx") `
-        (Join-Path $manual "QRcode-tool-User-Manual-zh-TW.docx")
+    $docs = @($langs | ForEach-Object { Join-Path $manual "QRcode-tool-User-Manual-$_.docx" })
+    & powershell -NoProfile -ExecutionPolicy Bypass -File to-pdf.ps1 @docs
     if ($LASTEXITCODE) { throw "pdf export" }
 } finally {
     Pop-Location

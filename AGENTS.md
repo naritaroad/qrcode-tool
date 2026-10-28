@@ -73,11 +73,13 @@ triggered from one of their own callbacks.
 
 ## User manual
 
-`docs/manual` holds the user manual (PDF + Word, English and Traditional Chinese). Its text is in
-`docs/manual/build/content.*.js`; the screenshots are rendered from the real `.slint` files. When a
-visible feature or window changes, update the text and rebuild with
-`docs/manual/build/build.ps1` (Windows, Node.js, Microsoft Word). The release workflow attaches
-the committed `.pdf`/`.docx` files to every GitHub release.
+`docs/manual` holds the user manual (PDF + Word) in all ten UI languages. Its text is in
+`docs/manual/build/content.<lang>.js`; the screenshots are rendered from the real `.slint` files.
+When a visible feature or window changes, update the text in every language and rebuild with
+`docs/manual/build/build.ps1` (Windows, Node.js, Microsoft Word; `-Langs ja,ko` limits the
+languages). The release workflow attaches only the English and Traditional Chinese
+`.pdf`/`.docx` files to every GitHub release. The READMEs in `docs/i18n` follow the English
+`README.md`; keep their language links in sync.
 
 **Screenshots are stored in `docs/manual/screenshots/<lang>/<name>.png`.** That folder is
 git-ignored: never commit or push it. `build.ps1` reuses these files and only takes the missing
@@ -88,7 +90,8 @@ powershell -ExecutionPolicy Bypass -File docs\manual\build\build.ps1 -Shots tool
 ```
 
 `-Shots all` retakes everything (needed on a fresh checkout or after changing `Theme`/widgets
-used everywhere); `-SkipShots` only rebuilds the documents. Retaking `desktop` also retakes the
+used everywhere); `-SkipShots` only rebuilds the documents. Texts of the mock desktop and menus
+in the screenshots are in `docs/manual/build/docscenes/strings.<lang>.json`. Retaking `desktop` also retakes the
 scan and detail screenshots drawn on it, and `camera-source` retakes `camera`. Names (defined in
 `NAMES` in `docs/manual/build/shoot.js`, cropped in `figures.js`):
 

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- README and user manual (PDF and Word) in Simplified Chinese, Spanish, Portuguese (Brazil), Japanese, Korean, French, German and Russian, in `docs/i18n` and `docs/manual`. Release downloads still carry only the English and Traditional Chinese manuals.
+
+### Changed
+
+- The **?** button on the floating toolbar opens the manual in the language of the UI.
+
 ## [1.0.1] - 2026-10-15
 
 ### Changed
